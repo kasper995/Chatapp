@@ -4,4 +4,8 @@
     <string name="welcome">Welcome, please type your username</string>
     <string name="close">Close Chatapp</string>
     <string name="logout">Sign out</string>
+    <string name="theme_settings">Theme</string>
+    <string name="lighttheme_setting">Light Theme</string>
+    <string name="darktheme_setting">Dark Theme</string>
+    <string name="username">Please type your username here</string>
 </resources>

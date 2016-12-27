@@ -2,7 +2,7 @@ package com.example.kaspe.chatapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +33,7 @@ import cz.msebera.android.httpclient.Header;
 
 
 
-public class ChatClass extends ActionBarActivity implements View.OnKeyListener, View.OnClickListener {
+public class ChatClass extends AppCompatActivity implements View.OnKeyListener, View.OnClickListener {
 
     final String MESSAGES_ENDPOINT = "http://pusher-chat-demo.herokuapp.com";
     final String APP_KEY ="faa685e4bb3003eb825c";
@@ -47,7 +47,7 @@ public class ChatClass extends ActionBarActivity implements View.OnKeyListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.chat);
         usernameInput = (EditText) findViewById(R.id.username_input);
 
         username = this.getIntent().getExtras().getString("username");
@@ -105,13 +105,17 @@ public class ChatClass extends ActionBarActivity implements View.OnKeyListener, 
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.close_settings) {
-
+            //create a new activity of closing
             Intent i = new Intent(this, Closing.class);
+            //closes all activies and open a new one
             i.setFlags(i.FLAG_ACTIVITY_CLEAR_TASK|i.FLAG_ACTIVITY_NEW_TASK);
+            //starts the closing activity
             startActivity(i);
         }
         if (id == R.id.logout_settings) {
+            //clears username field
             usernameInput.setText("");
+            //returns to main
             finish();
 
         }
@@ -130,20 +134,22 @@ public class ChatClass extends ActionBarActivity implements View.OnKeyListener, 
     }
 
     private void postMessage()  {
+        //gets the messages from the input field
         String text = messageInput.getText().toString();
-
+        //checks if inputfield is empty
         if (text.equals("")) {
+            //do notthing if empty
             return;
         }
 
         RequestParams params = new RequestParams();
-
+        //the info that is send with the post
         params.put("text", text);
         params.put("name", username);
         params.put("time", new Date().getTime());
-
+        //makes a new client
         AsyncHttpClient client = new AsyncHttpClient();
-
+        //try to post the messages to the server
         client.post(MESSAGES_ENDPOINT + "/messages", params, new JsonHttpResponseHandler(){
 
             @Override
@@ -151,6 +157,7 @@ public class ChatClass extends ActionBarActivity implements View.OnKeyListener, 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        //clears the input field so a new messages can be typed
                         messageInput.setText("");
                     }
                 });
@@ -158,7 +165,8 @@ public class ChatClass extends ActionBarActivity implements View.OnKeyListener, 
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(getApplicationContext(), "Something went wrong :(", Toast.LENGTH_LONG).show();
+                //notifies user that the post failed
+                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
             }
         });
 

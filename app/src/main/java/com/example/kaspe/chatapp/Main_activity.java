@@ -13,14 +13,14 @@ import android.widget.EditText;
  * Created by kaspe on 27-12-2016.
  */
 
-public class Main_activity extends AppCompatActivity implements View.OnKeyListener {
+public class Main_Activity extends AppCompatActivity implements View.OnKeyListener {
 
     EditText usernameInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logon);
+        setContentView(R.layout.logon);
         usernameInput = (EditText) findViewById(R.id.username_input);
         usernameInput.setOnKeyListener(this);
     }
@@ -45,6 +45,19 @@ public class Main_activity extends AppCompatActivity implements View.OnKeyListen
 
             finish();
         }
+        if (id == R.id.darktheme_settings) {
+            return true;
+
+
+
+        }
+        if (id == R.id.lighttheme_settings) {
+            setTheme(R.style.Lighttheme);
+
+
+
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
