@@ -10,7 +10,7 @@ import android.widget.EditText;
 import static com.example.kaspe.chatapp.R.styleable.View;
 
 /**
- * Created by kaspe on 27-12-2016.
+ * Created by kaspe on 27-12-2016. king
  */
 
 
