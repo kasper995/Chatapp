@@ -3,6 +3,7 @@ package com.example.kaspe.chatapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,43 +19,43 @@ import static android.R.attr.button;
  * Created by kaspe on 27-12-2016.
  */
 
-public class Logon
+public class Logon extends AppCompatActivity
 {
 
-    EditText username; // input of username
+    EditText userinput; // input of username
     Button logonBtn; //login button
     TextView users; //display users (for testing)
-    List list; // list of users
     Context context;
+    String username;
 
-    public void spref(){
+    public void spref(String username)
+    {
+        userinput = (EditText) findViewById(R.id.usernameEditTxt);
+        SharedPreferences sharedPref = context.getSharedPreferences("users",Context.MODE_PRIVATE); // declaring shared preferences with file users
+        SharedPreferences.Editor editor	= sharedPref.edit(); // makes you able to edit in shared pref.
 
-        SharedPreferences sharedPref = context.getSharedPreferences("users",Context.MODE_PRIVATE); // declaring shard preferences with file users
-        SharedPreferences.Editor editor	= sharedPref.edit(); // makes you able to edit??? (come back to)
+        editor.putString("username",username); // takes string
+        editor.apply(); // applies changes
+    }
 
-        Set<String> set = new HashSet<String>(); // i have no idea (come back to)
-        set.addAll(list); // adds items to list
-        editor.putStringSet( "users",set); // no idea (come back to)
-        editor.apply(); // applies changes? (come back to)
+    public void getsaveddata()
+    {
+
+        SharedPreferences sharedPref = context.getSharedPreferences("users",Context.MODE_PRIVATE); // declaring shared preferences with file users
+        sharedPref.getString("username",username); // gets user as string
+    }
+
+    public void reset(View view)
+    {
+        username = "";
 
     }
 
-    public void getsaveddata(){
+    public void show()
+    {
 
-        SharedPreferences	sharedPref	= context.getSharedPreferences("users",Context.MODE_PRIVATE);
-        Set<String> set = new HashSet<String>();
-        list.addAll(sharedPref.getStringSet("users", set));
-    }
+            users.setText(username);
 
-    public void reset(View view) {
-        list.clear();
-        resetfile();
-    }
-
-    public void show(){
-        if (list != null) {
-            users.setText(list.toString());
-        }
     }
 
 
