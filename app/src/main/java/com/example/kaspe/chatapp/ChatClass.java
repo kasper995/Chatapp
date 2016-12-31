@@ -46,6 +46,7 @@ public class ChatClass extends AppCompatActivity implements View.OnKeyListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
+        setTitle("Chat");
         usernameInput = (EditText) findViewById(R.id.username_input);
 
         username = this.getIntent().getExtras().getString("username");
@@ -83,6 +84,7 @@ public class ChatClass extends AppCompatActivity implements View.OnKeyListener, 
             }
 
         });
+
 
     }
 

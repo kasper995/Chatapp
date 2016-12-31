@@ -21,6 +21,7 @@ public class Main_Activity extends AppCompatActivity implements View.OnKeyListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logon);
+        setTitle("Log in");
         if (getSavedUser() != "")
         {
             allreadyLoggedOn(getSavedUser());
