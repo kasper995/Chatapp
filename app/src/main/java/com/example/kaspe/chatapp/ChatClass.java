@@ -1,6 +1,8 @@
 package com.example.kaspe.chatapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -28,7 +30,6 @@ import java.util.Date;
 import cz.msebera.android.httpclient.Header;
 
 
-
 public class ChatClass extends AppCompatActivity implements View.OnKeyListener, View.OnClickListener {
 
     final String MESSAGES_ENDPOINT = "http://pusher-chat-demo.herokuapp.com";
@@ -39,6 +40,7 @@ public class ChatClass extends AppCompatActivity implements View.OnKeyListener, 
     Button sendButton;
     String username;
     EditText usernameInput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,8 +111,8 @@ public class ChatClass extends AppCompatActivity implements View.OnKeyListener, 
             startActivity(i);
         }
         if (id == R.id.logout_settings) {
-            //clears username field
-            usernameInput.setText("");
+
+            clearSavedUser();
             //returns to main
             finish();
 
@@ -171,6 +173,12 @@ public class ChatClass extends AppCompatActivity implements View.OnKeyListener, 
     @Override
     public void onClick(View v) {
         postMessage();
+    }
+    public void clearSavedUser(){
+        SharedPreferences sharedPref = getSharedPreferences("yoyo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("username", "");
+        editor.commit();
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.kaspe.chatapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -8,17 +10,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Main_Activity extends AppCompatActivity implements View.OnKeyListener {
 
     EditText usernameInput;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logon);
+        if (getSavedUser() != "")
+        {
+            allreadyLoggedOn(getSavedUser());
+        }
         usernameInput = (EditText) findViewById(R.id.username_input);
         usernameInput.setOnKeyListener(this);
+
+
     }
 
 
@@ -52,11 +62,34 @@ public class Main_Activity extends AppCompatActivity implements View.OnKeyListen
             String username = usernameInput.getText().toString();
             Intent intent = new Intent(getApplicationContext(),ChatClass .class);
             intent.putExtra("username", username);
+            save(username);
             startActivity(intent);
         }
         return true;
     }
-    private void allreadyLoggedOn(){
-        
+    public void allreadyLoggedOn(String user){
+
+        String username = user;
+        Intent intent = new Intent(getApplicationContext(),ChatClass .class);
+        intent.putExtra("username", username);
+        startActivity(intent);
+    }
+
+    public void save(String user){
+        SharedPreferences sharedPref = getSharedPreferences("yoyo",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("username", user);
+        editor.commit();
+    }
+    public String getSavedUser(){
+        String savedUser;
+        SharedPreferences	sharedPref	= this.getSharedPreferences("yoyo",Context.MODE_PRIVATE);
+        savedUser = sharedPref.getString("username","");
+        toast("welcome " + savedUser);
+        return savedUser;
+    }
+
+    private void toast(String s){
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
 }
