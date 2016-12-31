@@ -27,10 +27,6 @@ import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
-/**
- * Created by kaspe on 27-12-2016.
- */
-
 
 
 public class ChatClass extends AppCompatActivity implements View.OnKeyListener, View.OnClickListener {

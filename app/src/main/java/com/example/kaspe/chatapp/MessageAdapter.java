@@ -13,16 +13,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by kaspe on 27-12-2016.
- */
 
 public class MessageAdapter extends BaseAdapter {
 
     Context messageContext;
     List<Message> messageList;
 
-    public MessageAdapter(Context context, List<Message> messages){
+    public MessageAdapter(Context context, List<Message> messages) {
         messageList = messages;
         messageContext = context;
     }
@@ -45,7 +42,7 @@ public class MessageAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MessageViewHolder holder;
-        if (convertView == null){
+        if (convertView == null) {
             LayoutInflater messageInflater = (LayoutInflater) messageContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = messageInflater.inflate(R.layout.message, null);
             holder = new MessageViewHolder();
@@ -64,25 +61,21 @@ public class MessageAdapter extends BaseAdapter {
         holder.senderView.setText(message.name);
 
         Picasso.with(messageContext).
-                //finds your picture on twitter if exist
-                load("https://twitter.com/"+message.name+"/profile_image?size=original").
-                //otherwise uses ic_Lanucher as default
-                placeholder(R.mipmap.default_userpicture).
+                //finds your picture on twitter if it exist
+                        load("https://twitter.com/" + message.name + "/profile_image?size=original").
+                //otherwise uses default_userpicture as default
+                        placeholder(R.mipmap.default_userpicture).
                 //places picture into imageview
-                into(holder.thumbnailImageView);
+                        into(holder.thumbnailImageView);
         return convertView;
     }
 
-    public void add(Message message){
+    public void add(Message message) {
         //adds the message you wrote into the list
         messageList.add(message);
         //notifies the data has changed and will update the list
         notifyDataSetChanged();
     }
 
-    private static class MessageViewHolder {
-        public ImageView thumbnailImageView;
-        public TextView senderView;
-        public TextView bodyView;
-    }
+
 }

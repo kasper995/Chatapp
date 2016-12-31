@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/file"
-        android:title="@string/theme_settings">
-        <!-- theme submenues -->
-        <menu>
-            <item
-                android:id="@+id/lighttheme_settings"
-                android:title="@string/lighttheme_setting" />
-            <item
-                android:id="@+id/darktheme_settings"
-                android:title="@string/darktheme_setting" />
-        </menu>
-    </item>
+
+
     <item
         android:id="@+id/close_settings"
         android:title="@string/close">

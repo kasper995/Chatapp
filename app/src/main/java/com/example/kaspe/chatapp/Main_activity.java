@@ -9,10 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-/**
- * Created by kaspe on 27-12-2016.
- */
-
 public class Main_Activity extends AppCompatActivity implements View.OnKeyListener {
 
     EditText usernameInput;
@@ -42,21 +38,9 @@ public class Main_Activity extends AppCompatActivity implements View.OnKeyListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.close_settings) {
-
             finish();
         }
-        if (id == R.id.darktheme_settings) {
-            return true;
 
-
-
-        }
-        if (id == R.id.lighttheme_settings) {
-            setTheme(R.style.Lighttheme);
-
-
-
-        }
 
 
         return super.onOptionsItemSelected(item);
@@ -71,5 +55,8 @@ public class Main_Activity extends AppCompatActivity implements View.OnKeyListen
             startActivity(intent);
         }
         return true;
+    }
+    private void allreadyLoggedOn(){
+        
     }
 }
