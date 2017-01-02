@@ -47,15 +47,16 @@ public class ChatClass extends AppCompatActivity implements View.OnKeyListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
         setTitle("Chat");
+
         usernameInput = (EditText) findViewById(R.id.username_input);
-
-        username = this.getIntent().getExtras().getString("username");
-        Toast.makeText(this, "Welcome, " + username + "!", Toast.LENGTH_LONG).show();
-
         messageInput = (EditText) findViewById(R.id.message_input);
-        messageInput.setOnKeyListener(this);
-
         sendButton = (Button) findViewById(R.id.send_button);
+
+
+        getUser();
+
+
+        messageInput.setOnKeyListener(this);
         sendButton.setOnClickListener(this);
 
         messageAdapter = new MessageAdapter(this, new ArrayList<Message>());
@@ -132,6 +133,10 @@ public class ChatClass extends AppCompatActivity implements View.OnKeyListener, 
         }
         return true;
     }
+    @Override
+    public void onClick(View v) {
+        postMessage();
+    }
 
     private void postMessage()  {
         //gets the messages from the input field
@@ -172,15 +177,20 @@ public class ChatClass extends AppCompatActivity implements View.OnKeyListener, 
 
     }
 
-    @Override
-    public void onClick(View v) {
-        postMessage();
-    }
+
     public void clearSavedUser(){
         SharedPreferences sharedPref = getSharedPreferences("yoyo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("username", "");
         editor.commit();
     }
+
+
+    public void getUser()
+    {
+        username = this.getIntent().getExtras().getString("username");
+        Toast.makeText(this, "Welcome, " + username, Toast.LENGTH_LONG).show();
+    }
+
 
 }

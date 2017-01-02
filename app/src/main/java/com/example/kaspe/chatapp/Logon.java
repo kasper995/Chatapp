@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Main_Activity extends AppCompatActivity implements View.OnKeyListener {
+public class Logon extends AppCompatActivity implements View.OnKeyListener {
 
     EditText usernameInput;
 
@@ -61,7 +61,7 @@ public class Main_Activity extends AppCompatActivity implements View.OnKeyListen
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
             String username = usernameInput.getText().toString();
-            Intent intent = new Intent(getApplicationContext(),ChatClass .class);
+            Intent intent = new Intent(this,ChatClass.class);
             intent.putExtra("username", username);
             save(username);
             startActivity(intent);
@@ -71,7 +71,7 @@ public class Main_Activity extends AppCompatActivity implements View.OnKeyListen
     public void allreadyLoggedOn(String user){
 
         String username = user;
-        Intent intent = new Intent(getApplicationContext(),ChatClass .class);
+        Intent intent = new Intent(this,ChatClass .class);
         intent.putExtra("username", username);
         startActivity(intent);
     }
@@ -93,4 +93,5 @@ public class Main_Activity extends AppCompatActivity implements View.OnKeyListen
     private void toast(String s){
         Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
+
 }
